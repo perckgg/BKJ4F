@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Wave{
+public class Wave_fish{
     public string waveName;
-    public int numberOfRubbish;
-    public GameObject[] typeOfRubbish;
+    public int numberOfFish;
+    public GameObject[] typeOfFish;
     public float timeBetweenWaves;
+  
 
 }
-public class WaveSpawner : MonoBehaviour
+public class FishSpawner : MonoBehaviour
 {
-    public Wave[] waves;
+    public Wave_fish[] waves;
     public  Transform[] spawnPoints;
-    private Wave currentWave;
+    private Wave_fish currentWave;
     private int currentWaveNumber;
     private bool canSpawn=true;
     private float nextSpawnTime;
      void Update(){
         currentWave=waves[currentWaveNumber];
         SpawnWave();
-        GameObject[] totalRubbish= GameObject.FindGameObjectsWithTag("Rubbish");
-        if(totalRubbish.Length==0&&!canSpawn&&currentWaveNumber+1!=waves.Length){
+        GameObject[] totalFish= GameObject.FindGameObjectsWithTag("BakaFish");
+        if(totalFish.Length==0&&!canSpawn&&currentWaveNumber+1!=waves.Length){
             SpawnNextWave();
         }
     }
@@ -33,13 +34,13 @@ public class WaveSpawner : MonoBehaviour
     void SpawnWave(){
         if (canSpawn&&nextSpawnTime<Time.time)
         {
-        GameObject randomRubbish=currentWave.typeOfRubbish[Random.Range(0,currentWave.typeOfRubbish.Length)];
-        Transform randomPoint = spawnPoints[Random.Range(0,spawnPoints.Length)];
-        Instantiate(randomRubbish,randomPoint.position,Quaternion.identity);
-        currentWave.numberOfRubbish--;
+        GameObject randomFish=currentWave.typeOfFish[Random.Range(0,currentWave.typeOfFish.Length)];
+        Transform Point = spawnPoints[Random.Range(0,spawnPoints.Length)];
+        Instantiate(randomFish,Point.position,Quaternion.identity);
+        currentWave.numberOfFish--;
         nextSpawnTime=Time.time+currentWave.timeBetweenWaves;
         }
-        if(currentWave.numberOfRubbish==0)
+        if(currentWave.numberOfFish==0)
         {
             canSpawn=false;
         }

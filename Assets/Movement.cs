@@ -26,6 +26,5 @@ public class Movement : MonoBehaviour
     {
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
-
-
+    
 }
